@@ -12,16 +12,17 @@
 
 #include "fdf.h"
 
-t_coord		*lstnew(t_coord *xyz)
+/*****************SHOW LIST!*******************/
+
+void		show_list(t_fdf *fdf, t_coord *xyz)
 {
-	while (xyz->next)
+	while (xyz)
+	{
+		ft_printf("x: %d, y: %d, z: %d\n", xyz->x, xyz->y, xyz->z);
 		xyz = xyz->next;
-	xyz->next = malloc(sizeof(t_coord));
-	xyz->x = 0;
-	xyz->y = 0;
-	xyz->z = 0;
-	return (xyz->next);
+	}
 }
+/**********************************************/
 
 static int	exit_x(int keycode)
 {
@@ -41,18 +42,20 @@ int		main(int argc, char **argv)
 	t_fdf	*fdf;
 
 	i = 0;
-	xyz = malloc(sizeof(xyz));
-	x = 0;
-	y = 0;
-	z = 0;
-	fdf = malloc(sizeof(fdf));
-	FD = 0;
+	xyz = malloc(sizeof(t_coord));
+	xyz->x = 0;
+	xyz->y = 0;
+	xyz->z = 0;
 	xyz->next = NULL;
+	fdf = malloc(sizeof(t_fdf));
+	FD = 0;
+	LINE = NULL;
 	if (argc == 1 || argc > 2)
 		ft_error(ERR_1);
-	if ((FD = open(argv[1], O_RDONLY)) > 1)
+	if ((FD = open(argv[1], O_RDONLY)) < 1)
 		ft_error(ERR_0);
 	validation(fdf, xyz);
-	
+	show_list(fdf, xyz);
+	// system("leaks a.out");
 	return (0);
 }
