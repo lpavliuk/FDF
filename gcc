@@ -1,1 +1,1 @@
-gcc main.c validation.c libft/libft.a -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit -o fdf -I /usr/local/include
+gcc main.c validation.c work_with_net.c libft/libft.a -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit -o fdf -I /usr/local/include

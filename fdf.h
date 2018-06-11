@@ -22,8 +22,14 @@
 # define ERR_1 "{red}ERROR: {yellow}must be ONLY ONE argument!\n"
 # define ERR_2 "{red}ERROR: {yellow}incorrect data in file!\n"
 
+# define MLX fdf->mlx_ptr
+# define WIN fdf->win_ptr
 # define FD fdf->fd
 # define LINE fdf->line
+# define MAX_X fdf->max_x
+# define MAX_Y fdf->max_y
+# define NUM_X fdf->num_x
+# define NUM_Y fdf->num_y
 
 typedef struct	s_coord
 {
@@ -35,11 +41,19 @@ typedef struct	s_coord
 
 typedef struct	s_fdf
 {
+	void	*mlx_ptr;
+	void	*win_ptr;
+	int		max_x;
+	int		max_y;
+	int		num_x;
+	int		num_y;
 	int		fd;
 	char	*line;
 }				t_fdf;
 
 void			ft_error(char *error);
 void			validation(t_fdf *fdf, t_coord *xyz);
+void			from_z_to_xy(t_fdf *fdf, t_coord *xyz);
+void			drawing_net(t_fdf *fdf, t_coord *xyz);
 
 #endif

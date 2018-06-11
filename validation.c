@@ -66,4 +66,6 @@ void			validation(t_fdf *fdf, t_coord *xyz)
 		i++;
 		free(LINE);
 	}
+	NUM_X = num_of_coord;
+	NUM_Y = i;
 }
