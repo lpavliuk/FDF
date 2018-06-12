@@ -56,6 +56,7 @@ void		drawing_net(t_fdf *fdf, t_coord *xyz)
 	t_coord *tmp;
 
 	n = 0;
+	// from_z_to_xy(xyz, fdf);
 	while (xyz)
 	{
 		i = NUM_X;

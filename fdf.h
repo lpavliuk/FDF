@@ -39,9 +39,9 @@
 
 typedef struct	s_coord
 {
-	int				x;
-	int				y;
-	int				z;
+	double			x;
+	double			y;
+	double			z;
 	struct s_coord	*next;
 }				t_coord;
 

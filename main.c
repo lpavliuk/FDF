@@ -67,9 +67,9 @@ int			main(int argc, char **argv)
 	MAX_Y = 0;
 	NUM_X = 0;
 	NUM_Y = 0;
-	RAD_X = 0;
-	RAD_Y = 0;
-	RAD_Z = 0;
+	RAD_X = 0.05;
+	RAD_Z = 0.05;
+	RAD_Y = 0.05;
 	XYZ = xyz;
 	if (argc == 1 || argc > 2)
 		ft_error(ERR_1);

@@ -21,15 +21,15 @@ int	from_z_to_xy(t_coord *xyz, t_fdf *fdf)
 	while (xyz)
 	{
 		x[0] = xyz->x;
-    	y[0] = xyz->y * cos(RAD_X) + xyz->z * sin(RAD_X);
-    	z[0] = xyz->z * cos(RAD_X) - xyz->y * sin(RAD_X);
+    	y[0] = (xyz->y * cos(RAD_X)) + (xyz->z * -sin(RAD_X));
+    	z[0] = (xyz->y * sin(RAD_X)) + (xyz->z * cos(RAD_X));
 
-    	x[1] = x[0] * cos(RAD_Y) - z[0] * sin(RAD_Y);
-    	y[1] = y[0];
-		xyz->z = z[0] * cos(RAD_Y) + x[0] * sin(RAD_Y);
+    	// x[1] = (x[0] * cos(RAD_Y)) - (z[0] * sin(RAD_Y));
+    	// y[1] = y[0];
+		xyz->x = x[0];
 
-		xyz->x = -x[1] * cos(RAD_Z) + y[1] * sin(RAD_Z);
-   		xyz->y = y[1] * cos(RAD_Z) - x[1] * sin(RAD_Z);
+		xyz->y = y[0];
+   		xyz->z = z[0];
 
 		xyz = xyz->next;
 	}
