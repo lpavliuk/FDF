@@ -25,25 +25,15 @@ void		show_list(t_fdf *fdf, t_coord *xyz)
 }
 /**********************************************/
 
-static int	exit_x(int keycode)
-{
-	exit(0);
-}
-
 void		ft_error(char *error)
 {
 	ft_printf(error);
 	exit(0);
 }
 
-static int	key_hook(int keycode, t_fdf *fdf)
+static int	exit_x(int keycode)
 {
-	if (keycode == 53)
-	{
-		mlx_destroy_window(MLX, WIN);
-		exit(0);
-	}
-	return (0);
+	exit(0);
 }
 
 static void	draw_net(t_fdf *fdf, t_coord *xyz)
@@ -77,12 +67,15 @@ int			main(int argc, char **argv)
 	MAX_Y = 0;
 	NUM_X = 0;
 	NUM_Y = 0;
+	RAD_X = 0;
+	RAD_Y = 0;
+	RAD_Z = 0;
+	XYZ = xyz;
 	if (argc == 1 || argc > 2)
 		ft_error(ERR_1);
 	if ((FD = open(argv[1], O_RDONLY)) < 1)
 		ft_error(ERR_0);
 	validation(fdf, xyz);
-	from_z_to_xy(fdf, xyz);
 	draw_net(fdf, xyz);
 	show_list(fdf, xyz);
 	// system("leaks fdf");

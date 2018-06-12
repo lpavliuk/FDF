@@ -30,6 +30,12 @@
 # define MAX_Y fdf->max_y
 # define NUM_X fdf->num_x
 # define NUM_Y fdf->num_y
+# define RAD_X fdf->rad_x
+# define RAD_Y fdf->rad_y
+# define RAD_Z fdf->rad_z
+# define XYZ fdf->xyz
+
+# define PI 3.14159265359
 
 typedef struct	s_coord
 {
@@ -47,13 +53,20 @@ typedef struct	s_fdf
 	int		max_y;
 	int		num_x;
 	int		num_y;
+	double	rad_x;
+	double	rad_y;
+	double	rad_z;
 	int		fd;
 	char	*line;
+	t_coord	*xyz;
 }				t_fdf;
 
 void			ft_error(char *error);
 void			validation(t_fdf *fdf, t_coord *xyz);
-void			from_z_to_xy(t_fdf *fdf, t_coord *xyz);
+int				key_hook(int keycode, t_fdf *fdf);
+int				from_z_to_xy(t_coord *xyz, t_fdf *fdf);
+// int				for_y(t_coord *xyz);
+// int				for_z(t_coord *xyz, t_fdf *fdf);
 void			drawing_net(t_fdf *fdf, t_coord *xyz);
 
 #endif

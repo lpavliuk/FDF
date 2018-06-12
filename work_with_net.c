@@ -12,31 +12,6 @@
 
 #include "fdf.h"
 
-void	from_z_to_xy(t_fdf *fdf, t_coord *xyz)
-{
-	int		x;
-	int		y;
-	t_coord	*tmp;
-
-	tmp = xyz;
-	while (xyz)
-	{
-		x = xyz->x;
-		y = xyz->y;
-		xyz->x = ((x * cos(xyz->z)) + (y * sin(xyz->z))) * 1000/2/NUM_X + 250;
-		xyz->y = ((y * cos(xyz->z)) - (x * sin(xyz->z))) * 1000/2/NUM_Y + 250;
-		xyz = xyz->next;
-	}
-	while (tmp)
-	{
-		if (!MAX_X || MAX_X < tmp->x)
-			MAX_X = tmp->x;
-		if (!MAX_Y || MAX_Y < tmp->y)
-			MAX_Y = tmp->y;
-		tmp = tmp->next;
-	}
-}
-
 void		write_line(t_fdf *fdf, int x0, int y0, int x1, int y1)
 {
  	int dx; 
@@ -46,6 +21,10 @@ void		write_line(t_fdf *fdf, int x0, int y0, int x1, int y1)
  	int err;
  	int	e2;
  
+ 	x0 = x0 * 1000/2/NUM_X + 250;
+ 	y0 = y0 * 1000/2/NUM_Y + 250;
+ 	x1 = x1 * 1000/2/NUM_X + 250;
+ 	y1 = y1 * 1000/2/NUM_Y + 250;
  	dx = abs(x1 - x0);
  	dy = abs(y1 - y0);
  	sx = (x0 < x1) ? 1 : -1;
@@ -74,8 +53,6 @@ void		drawing_net(t_fdf *fdf, t_coord *xyz)
 {
 	int		i;
 	int		n;
-	int		x;
-	int		y;
 	t_coord *tmp;
 
 	n = 0;
@@ -83,13 +60,11 @@ void		drawing_net(t_fdf *fdf, t_coord *xyz)
 	{
 		i = NUM_X;
 		tmp = xyz->next;
-		x = xyz->x;
-		y = xyz->y;
 		if (xyz->next && n < NUM_X - 1)
 		{
 			// ft_printf("y: %d\ntmp->y: %d\n", y, tmp->y);
-			show_list(fdf, xyz);
-			write_line(fdf, x, y, xyz->next->x, xyz->next->y);
+			// show_list(fdf, xyz);
+			write_line(fdf, xyz->x, xyz->y, xyz->next->x, xyz->next->y);
 		}
 		while (tmp && i > 1)
 		{
@@ -101,7 +76,7 @@ void		drawing_net(t_fdf *fdf, t_coord *xyz)
 		else
 			n++;
 		if (tmp && i == 1)
-			write_line(fdf, x, y, tmp->x, tmp->y);
+			write_line(fdf, xyz->x, xyz->y, tmp->x, tmp->y);
 		xyz = xyz->next;
 	}
 }
