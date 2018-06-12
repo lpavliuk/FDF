@@ -46,15 +46,16 @@ void		write_line(t_fdf *fdf, int x0, int y0, int x1, int y1)
  	int err;
  	int	e2;
  
- 	dx = abs(x1-x0);
- 	dy = abs(y1-y0);
+ 	dx = abs(x1 - x0);
+ 	dy = abs(y1 - y0);
  	sx = (x0 < x1) ? 1 : -1;
  	sy = (y0 < y1) ? 1 : -1;
  	err = ((dx > dy) ? dx : -dy)/2; 
- 	while (x0 != x1 && y0 != y1)
+ 	while (x0 != x1 || y0 != y1)
  	{
     	mlx_pixel_put(MLX, WIN, x0, y0, 0xFFFFFF);
-    	mlx_pixel_put(MLX, WIN, y0, x0, 0xFFFFFF);
+    	if (x0 == x1 && y0 == y1)
+    		break ;
     	e2 = err;
     	if (e2 > -dx)
     	{
@@ -71,17 +72,36 @@ void		write_line(t_fdf *fdf, int x0, int y0, int x1, int y1)
 
 void		drawing_net(t_fdf *fdf, t_coord *xyz)
 {
+	int		i;
+	int		n;
 	int		x;
 	int		y;
 	t_coord *tmp;
 
-	tmp = xyz;
+	n = 0;
 	while (xyz)
 	{
+		i = NUM_X;
+		tmp = xyz->next;
 		x = xyz->x;
 		y = xyz->y;
-		if (xyz->next)
+		if (xyz->next && n < NUM_X - 1)
+		{
+			// ft_printf("y: %d\ntmp->y: %d\n", y, tmp->y);
+			show_list(fdf, xyz);
 			write_line(fdf, x, y, xyz->next->x, xyz->next->y);
+		}
+		while (tmp && i > 1)
+		{
+			tmp = tmp->next;
+			i--;
+		}
+		if (n == NUM_X - 1)
+			n = 0;
+		else
+			n++;
+		if (tmp && i == 1)
+			write_line(fdf, x, y, tmp->x, tmp->y);
 		xyz = xyz->next;
 	}
 }

@@ -50,11 +50,7 @@ static void	draw_net(t_fdf *fdf, t_coord *xyz)
 {
 	MLX = mlx_init();
 	WIN = mlx_new_window(MLX, 1000, 1000, "FDF");
-	while (xyz)
-	{
-		drawing_net(fdf, xyz);
-		xyz = xyz->next;
-	}
+	drawing_net(fdf, xyz);
 	mlx_hook(WIN, 2, 0, key_hook, fdf);
 	mlx_hook(WIN, 17, 1L << 17, exit_x, 0);
 	mlx_loop(MLX);
