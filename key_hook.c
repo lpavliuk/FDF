@@ -39,31 +39,17 @@ static void	check_z(int keycode, t_coord *xyz, t_fdf *fdf)
 {
 
 	if (keycode == 83)
-	{
-		RAD_X += RAD_X;
-		from_z_to_xy(xyz, fdf);
-	}
+		for_x(xyz, fdf);
 	else if (keycode == 84)
-	{
-		from_z_to_xy(xyz, fdf);
-	}
+		for_y(xyz, fdf);
 	else if (keycode == 85)
-	{
-		from_z_to_xy(xyz, fdf);
-	}
+		for_z(xyz, fdf);
 	else if (keycode == 86)
-	{
-		RAD_X -= RAD_Y;
-		from_z_to_xy(xyz, fdf);
-	}
+		;
 	else if (keycode == 87)
-	{
-		from_z_to_xy(xyz, fdf);
-	}
+		;
 	else if (keycode == 88)
-	{
-		from_z_to_xy(xyz, fdf);
-	}
+		;
 }
 
 int			key_hook(int keycode, t_fdf *fdf)

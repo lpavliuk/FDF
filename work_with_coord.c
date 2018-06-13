@@ -12,46 +12,34 @@
 
 #include "fdf.h"
 
-int	from_z_to_xy(t_coord *xyz, t_fdf *fdf)
+int	for_x(t_coord *xyz, t_fdf *fdf)
 {
-	double	x[2];
-	double	y[2];
-	double	z[2];
+	double	y;
+	double	z;
 
-	while (xyz)
-	{
-		x[0] = xyz->x;
-    	y[0] = (xyz->y * cos(RAD_X)) + (xyz->z * -sin(RAD_X));
-    	z[0] = (xyz->y * sin(RAD_X)) + (xyz->z * cos(RAD_X));
-
-    	// x[1] = (x[0] * cos(RAD_Y)) - (z[0] * sin(RAD_Y));
-    	// y[1] = y[0];
-		xyz->x = x[0];
-
-		xyz->y = y[0];
-   		xyz->z = z[0];
-
-		xyz = xyz->next;
-	}
+	y = fdf->prev_y;
+	z = fdf->prev_z;
+	xyz->y = (y * cos(RAD_X)) + (z * sin(RAD_X));
+	xyz->z = (-y * sin(RAD_X)) + (z * cos(RAD_X));
 	return (0);
 }
 
-// int	for_z(t_coord *xyz)
-// {
-// 	int		rad;
-// 	int		z;
-// 	int		y;
-// 	t_coord	*tmp;
+int	for_y(t_coord *xyz, t_fdf *fdf)
+{
+	double	x;
 
-// 	tmp = xyz;
-// 	while (xyz)
-// 	{
-// 		y = xyz->y;
-// 		z = xyz->z;
-// 		rad = xyz->x + 1 * PI/180;
-// 		xyz->y = (y * cos(rad)) + (z * sin(rad));
-// 		xyz->z = (-y * cos(rad)) + (z * sin(rad));
-// 		xyz = xyz->next;
-// 	}
-// 	return (0);
-// }
+	x = fdf->prev_x;
+	xyz->x = (x * cos(RAD_Y)) + (xyz->z * sin(RAD_Y));
+	xyz->z = (-x * sin(RAD_Y)) + (xyz->z * cos(RAD_Y));
+	return (0);
+}
+
+int	for_z(t_coord *xyz, t_fdf *fdf)
+{
+	double	x;
+
+	x = xyz->x;
+	xyz->x = (x * cos(RAD_Z)) - (xyz->y * sin(RAD_Z));
+	xyz->y = (x * sin(RAD_Z)) + (xyz->y * cos(RAD_Z));
+	return (0);
+}

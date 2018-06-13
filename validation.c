@@ -36,9 +36,9 @@ static int		write_coord(t_fdf *fdf, t_coord *xyz, int i)
 		xyz = lstnew(xyz);
 	while (str[n] != 0)
 	{
-		xyz->x = n;
-		xyz->y = i;
-		xyz->z = ft_atoi(str[n]);
+		xyz->x = (float)n;
+		xyz->y = (float)i;
+		xyz->z = (float)ft_atoi(str[n]);
 		n++;
 		if (str[n])
 			xyz = lstnew(xyz);

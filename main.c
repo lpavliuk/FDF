@@ -18,7 +18,7 @@ void		show_list(t_fdf *fdf, t_coord *xyz)
 {
 	while (xyz)
 	{
-		ft_printf("x: %d, y: %d, z: %d\n", xyz->x, xyz->y, xyz->z);
+		printf("x: %f, y: %f, z: %f\n", xyz->x, xyz->y, xyz->z);
 		xyz = xyz->next;
 	}
 	ft_printf("Num x: %d\nNum y: %d\n", NUM_X, NUM_Y);
@@ -67,9 +67,12 @@ int			main(int argc, char **argv)
 	MAX_Y = 0;
 	NUM_X = 0;
 	NUM_Y = 0;
-	RAD_X = 0.05;
-	RAD_Z = 0.05;
-	RAD_Y = 0.05;
+	RAD_X = 0.1;
+	RAD_Z = 0.1;
+	RAD_Y = 0.1;
+	fdf->prev_x = 0;
+	fdf->prev_y = 0;
+	fdf->prev_z = 0;
 	XYZ = xyz;
 	if (argc == 1 || argc > 2)
 		ft_error(ERR_1);

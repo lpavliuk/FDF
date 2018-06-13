@@ -13,6 +13,8 @@
 #ifndef FDF_H
 # define FDF_H
 
+# include <stdio.h> /* DELETE IT! */
+
 # include "libft/libft.h"
 # include <mlx.h>
 # include <math.h>
@@ -36,12 +38,14 @@
 # define XYZ fdf->xyz
 
 # define PI 3.14159265359
+# define PX(a) (a * 1000/2/NUM_X + 250)
+# define PY(a) (a * 1000/2/NUM_Y + 250)
 
 typedef struct	s_coord
 {
-	double			x;
-	double			y;
-	double			z;
+	float			x;
+	float			y;
+	float			z;
 	struct s_coord	*next;
 }				t_coord;
 
@@ -53,9 +57,12 @@ typedef struct	s_fdf
 	int		max_y;
 	int		num_x;
 	int		num_y;
-	double	rad_x;
-	double	rad_y;
-	double	rad_z;
+	float	rad_x;
+	float	rad_y;
+	float	rad_z;
+	float	prev_x;
+	float	prev_y;
+	float	prev_z;
 	int		fd;
 	char	*line;
 	t_coord	*xyz;
@@ -64,9 +71,9 @@ typedef struct	s_fdf
 void			ft_error(char *error);
 void			validation(t_fdf *fdf, t_coord *xyz);
 int				key_hook(int keycode, t_fdf *fdf);
-int				from_z_to_xy(t_coord *xyz, t_fdf *fdf);
-// int				for_y(t_coord *xyz);
-// int				for_z(t_coord *xyz, t_fdf *fdf);
+int				for_x(t_coord *xyz, t_fdf *fdf);
+int				for_y(t_coord *xyz, t_fdf *fdf);
+int				for_z(t_coord *xyz, t_fdf *fdf);
 void			drawing_net(t_fdf *fdf, t_coord *xyz);
 
 #endif
