@@ -63,6 +63,7 @@ typedef struct	s_fdf
 	float	prev_x;
 	float	prev_y;
 	float	prev_z;
+	int		k;
 	int		fd;
 	char	*line;
 	t_coord	*xyz;

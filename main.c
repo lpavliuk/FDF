@@ -38,9 +38,26 @@ static int	exit_x(int keycode)
 
 static void	draw_net(t_fdf *fdf, t_coord *xyz)
 {
+	t_coord *tmp;
+
 	MLX = mlx_init();
 	WIN = mlx_new_window(MLX, 1000, 1000, "FDF");
+	tmp = xyz;
+	while (tmp)
+	{
+		fdf->prev_x = tmp->x;
+		fdf->prev_y = tmp->y;
+		fdf->prev_z = tmp->z;
+		for_x(tmp, fdf);
+		for_y(tmp, fdf);
+		for_z(tmp, fdf);
+		tmp = tmp->next;
+	}
+	show_list(fdf, xyz);
 	drawing_net(fdf, xyz);
+	RAD_X = 0;
+	RAD_Y = 0;
+	RAD_Z = 0;
 	mlx_hook(WIN, 2, 0, key_hook, fdf);
 	mlx_hook(WIN, 17, 1L << 17, exit_x, 0);
 	mlx_loop(MLX);
@@ -67,12 +84,13 @@ int			main(int argc, char **argv)
 	MAX_Y = 0;
 	NUM_X = 0;
 	NUM_Y = 0;
-	RAD_X = 0.1;
-	RAD_Z = 0.1;
+	RAD_X = 0.10;
 	RAD_Y = 0.1;
+	RAD_Z = 0.05;
 	fdf->prev_x = 0;
 	fdf->prev_y = 0;
 	fdf->prev_z = 0;
+	fdf->k = 1;
 	XYZ = xyz;
 	if (argc == 1 || argc > 2)
 		ft_error(ERR_1);
