@@ -36,10 +36,11 @@
 # define RAD_Y fdf->rad_y
 # define RAD_Z fdf->rad_z
 # define XYZ fdf->xyz
+# define SIZE fdf->size
 
 # define PI 3.14159265359
-# define PX(a) (a * 1000/2/NUM_X + 250)
-# define PY(a) (a * 1000/2/NUM_Y + 250)
+# define PX(a, b) (a * b/2/NUM_X + 750)
+# define PY(a, b) (a * b/2/NUM_Y + 200)
 
 typedef struct	s_coord
 {
@@ -66,15 +67,17 @@ typedef struct	s_fdf
 	int		k;
 	int		fd;
 	char	*line;
+	int		size;
+	// char	*color;
 	t_coord	*xyz;
 }				t_fdf;
 
 void			ft_error(char *error);
 void			validation(t_fdf *fdf, t_coord *xyz);
 int				key_hook(int keycode, t_fdf *fdf);
-int				for_x(t_coord *xyz, t_fdf *fdf);
-int				for_y(t_coord *xyz, t_fdf *fdf);
-int				for_z(t_coord *xyz, t_fdf *fdf);
+void			for_x(t_coord *xyz, t_fdf *fdf);
+void			for_y(t_coord *xyz, t_fdf *fdf);
+void			for_z(t_coord *xyz, t_fdf *fdf);
 void			drawing_net(t_fdf *fdf, t_coord *xyz);
 
 #endif

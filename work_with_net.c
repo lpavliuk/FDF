@@ -52,17 +52,15 @@ void		drawing_net(t_fdf *fdf, t_coord *xyz)
 	t_coord *tmp;
 
 	n = 0;
-	// from_z_to_xy(xyz, fdf);
+	if (SIZE < 0)
+		SIZE = 0;
 	while (xyz)
 	{
 		i = NUM_X;
 		tmp = xyz->next;
 		if (xyz->next && n < NUM_X - 1)
-		{
-			// ft_printf("y: %d\ntmp->y: %d\n", y, tmp->y);
-			// show_list(fdf, xyz);
-			write_line(fdf, (int)PX(xyz->x), (int)PY(xyz->y), (int)PX(xyz->next->x), (int)PY(xyz->next->y));
-		}
+			write_line(fdf, (int)PX(xyz->x, SIZE), (int)PY(xyz->y, SIZE),
+				(int)PX(xyz->next->x, SIZE), (int)PY(xyz->next->y, SIZE));
 		while (tmp && i > 1)
 		{
 			tmp = tmp->next;
@@ -73,7 +71,8 @@ void		drawing_net(t_fdf *fdf, t_coord *xyz)
 		else
 			n++;
 		if (tmp && i == 1)
-			write_line(fdf, (int)PX(xyz->x), (int)PY(xyz->y), (int)PX(tmp->x), (int)PY(tmp->y));
+			write_line(fdf, (int)PX(xyz->x, SIZE), (int)PY(xyz->y, SIZE),
+				(int)PX(tmp->x, SIZE), (int)PY(tmp->y, SIZE));
 		xyz = xyz->next;
 	}
 }

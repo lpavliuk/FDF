@@ -35,6 +35,26 @@ static void	work_with_xy(int keycode, t_coord *xyz)
 	}
 }
 
+static void	to_z(t_coord *xyz, char add)
+{
+	if (add)
+	{
+		while (xyz)
+		{
+			xyz->z *= 1.1;
+			xyz = xyz->next;
+		}
+	}
+	else
+	{
+		while (xyz)
+		{
+			xyz->z *= 0.9;
+			xyz = xyz->next;
+		}
+	}
+}
+
 static void	check_z(int keycode, t_coord *tmp, t_fdf *fdf)
 {
 	if (keycode == 83)
@@ -49,10 +69,6 @@ static void	check_z(int keycode, t_coord *tmp, t_fdf *fdf)
 		RAD_Y += 0.05;
 	else if (keycode == 88)
 		RAD_Z += 0.05;
-	// else if (keycode == 69)
-	// 	fdf->k++;
-	// else if (keycode == 78)
-	// 	fdf->k--;
 	while (tmp)
 	{
 		fdf->prev_x = tmp->x;
@@ -76,9 +92,12 @@ int			key_hook(int keycode, t_fdf *fdf)
 		keycode == 125 || keycode == 123)
 		work_with_xy(keycode, XYZ);
 	else if (keycode == 83 || keycode == 84 || keycode == 85
-		|| keycode == 86 || keycode == 87 || keycode == 88
-		|| keycode == 69 || keycode == 78)
+		|| keycode == 86 || keycode == 87 || keycode == 88)
 		check_z(keycode, XYZ, fdf);
+	else if (keycode == 69)
+		SIZE += 100;
+	else if (keycode == 78)
+		SIZE -= 100;
 	mlx_clear_window(MLX, WIN);
 	drawing_net(fdf, XYZ);
 	RAD_X = 0;

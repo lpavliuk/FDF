@@ -41,19 +41,18 @@ static void	draw_net(t_fdf *fdf, t_coord *xyz)
 	t_coord *tmp;
 
 	MLX = mlx_init();
-	WIN = mlx_new_window(MLX, 1000, 1000, "FDF");
+	WIN = mlx_new_window(MLX, 1920, 1080, "FDF");
 	tmp = xyz;
 	while (tmp)
 	{
 		fdf->prev_x = tmp->x;
 		fdf->prev_y = tmp->y;
-		fdf->prev_z = tmp->z;
+		fdf->prev_z = tmp->z * 0.5;
 		for_x(tmp, fdf);
 		for_y(tmp, fdf);
 		for_z(tmp, fdf);
 		tmp = tmp->next;
 	}
-	show_list(fdf, xyz);
 	drawing_net(fdf, xyz);
 	RAD_X = 0;
 	RAD_Y = 0;
@@ -84,13 +83,14 @@ int			main(int argc, char **argv)
 	MAX_Y = 0;
 	NUM_X = 0;
 	NUM_Y = 0;
-	RAD_X = 0.10;
-	RAD_Y = 0.1;
-	RAD_Z = 0.05;
+	RAD_X = -0.01;
+	RAD_Y = -0.15;
+	RAD_Z = 0.5;
 	fdf->prev_x = 0;
 	fdf->prev_y = 0;
 	fdf->prev_z = 0;
 	fdf->k = 1;
+	SIZE = 1000;
 	XYZ = xyz;
 	if (argc == 1 || argc > 2)
 		ft_error(ERR_1);
