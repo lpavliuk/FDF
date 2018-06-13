@@ -73,6 +73,7 @@ int			main(int argc, char **argv)
 	xyz->x = 0;
 	xyz->y = 0;
 	xyz->z = 0;
+	COLOR = 16777215;
 	xyz->next = NULL;
 	fdf = malloc(sizeof(t_fdf));
 	MLX = NULL;
@@ -100,7 +101,6 @@ int			main(int argc, char **argv)
 	fdf->y0 = 0;
 	SIZE = 1000;
 	XYZ = xyz;
-	COLOR = 16777215;
 	if (argc == 1 || argc > 2)
 		ft_error(ERR_1);
 	if ((FD = open(argv[1], O_RDONLY)) < 1 || read(FD, &LINE, 0) < 0)

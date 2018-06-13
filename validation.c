@@ -20,11 +20,68 @@ static t_coord	*lstnew(t_coord *xyz)
 	xyz->next->x = 0;
 	xyz->next->y = 0;
 	xyz->next->z = 0;
+	xyz->next->color = 16777215;
 	xyz->next->next = NULL;
 	return (xyz->next);
 }
 
-static void		check_str(char *str)
+static int		ft_atoi_base(const char *str)
+{
+	int			x;
+	int			n;
+	size_t		i;
+	long long	num;
+	char		*base = "0123456789ABCDEF";
+
+
+	x = 1;
+	i = 0;
+	num = 0;
+	while ((str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+			&& str[i] != '\0')
+		i++;
+	(str[i] == '-') ? x = -1 : 0;
+	(str[i] == '+' || str[i] == '-') ? i++ : 0;
+	while (str[i] >= '0' && str[i] <= '9'
+		&& str[i] >= 'A' && str[i] <= 'F')
+	{
+		if (str[i] >= '0' && str[i] <= '9')
+			num = num * 10 + (str[i] - '0');
+		else
+		{
+			n = 0;
+			while (base[n] != str[i])
+				n++;
+			num = num * 100 + n;
+		}
+		i++;
+	}
+	(num < 0 && x == -1) ? num = 0 : 0;
+	(num < 0 && x == 1) ? num = -1 : 0;
+	return ((int)(num * x));
+}
+
+static void		check_color(t_coord *xyz, char *str)
+{
+	int i;
+
+	i = 2;
+	if (str[0] != '0')
+		ft_error(ERR_4);
+	if (str[1] != 'x')
+		ft_error(ERR_4);
+	while (str[i] != '\0')
+	{
+		if (!ft_isdigit(str[i]) && str[i] < 'A' && str[i] > 'F')
+			ft_error(ERR_4);
+		i++;
+	}
+	if (i > 8)
+		ft_error(ERR_4);
+	xyz->color = ft_atoi_base(&str[2]);
+}
+
+static void		check_str(t_coord *xyz, char *str)
 {
 	int i;
 	int	minus;
@@ -35,12 +92,19 @@ static void		check_str(char *str)
 	plus = 0;
 	while (str[i] != '\0')
 	{
-		if (!ft_isdigit(str[i]) && str[i] != '-' && str[i] != '+')
+		if (!ft_isdigit(str[i]) && str[i] != '-' &&
+			str[i] != '+' && str[i] != ',')
 			ft_error(ERR_3);
 		else if (str[i] == '-')
 			minus++;
 		else if (str[i] == '+')
 			plus++;
+		else if (str[i] == ',')
+		{
+			check_color(xyz, &str[i + 1]);
+			ft_printf("%d\n", COLOR);
+			return ;
+		}
 		i++;
 		if (minus > 1 || plus > 1 || (minus && plus))
 			ft_error(ERR_3);
@@ -59,7 +123,7 @@ static int		write_coord(t_fdf *fdf, t_coord *xyz, int i)
 		xyz = lstnew(xyz);
 	while (str[n] != 0)
 	{
-		check_str(str[n]);
+		check_str(xyz, str[n]);
 		xyz->x = (float)n;
 		xyz->y = (float)i;
 		xyz->z = (float)ft_atoi(str[n]);

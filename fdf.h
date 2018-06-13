@@ -24,6 +24,7 @@
 # define ERR_1 "{red}ERROR: {yellow}must be ONLY ONE argument!\n"
 # define ERR_2 "{red}ERROR: {yellow}incorrect data in file!\n"
 # define ERR_3 "{red}ERROR: {yellow}incorrect input 'z' coordinate!\n"
+# define ERR_4 "{red}ERROR: {yellow}incorrect input color!\n"
 
 # define MLX fdf->mlx_ptr
 # define WIN fdf->win_ptr
@@ -38,9 +39,9 @@
 # define RAD_Z fdf->rad_z
 # define XYZ fdf->xyz
 # define SIZE fdf->size
-# define COLOR fdf->color
 # define X0 fdf->x0
 # define Y0 fdf->y0
+# define COLOR xyz->color
 
 # define PI 3.14159265359
 # define PX(a, b) (a * b/2/NUM_X + 750)
@@ -51,6 +52,7 @@ typedef struct	s_coord
 	float			x;
 	float			y;
 	float			z;
+	int				color;
 	struct s_coord	*next;
 }				t_coord;
 
@@ -72,7 +74,7 @@ typedef struct	s_fdf
 	int		k;
 	int		fd;
 	int		size;
-	int		color;
+	// int		color;
 	int		dx;
 	int		dy;
 	int		sx;

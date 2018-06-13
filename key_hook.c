@@ -37,20 +37,20 @@ static void	work_with_xy(int keycode, t_coord *xyz)
 
 static void	change_color(int keycode, t_fdf *fdf)
 {
-	if (keycode == 29)
-		COLOR = 16777215;
-	else if (keycode == 18)
-		COLOR = 16776960;
-	else if (keycode == 19)
-		COLOR = 16711680;
-	else if (keycode == 20)
-		COLOR = 65280;
-	else if (keycode == 21)
-		COLOR = 255;
-	else if (keycode == 22)
-		COLOR = 16711935;
-	else if (keycode == 23)
-		COLOR = 65535;
+	// if (keycode == 29)
+	// 	COLOR = 16777215;
+	// else if (keycode == 18)
+	// 	COLOR = 16776960;
+	// else if (keycode == 19)
+	// 	COLOR = 16711680;
+	// else if (keycode == 20)
+	// 	COLOR = 65280;
+	// else if (keycode == 21)
+	// 	COLOR = 255;
+	// else if (keycode == 22)
+	// 	COLOR = 16711935;
+	// else if (keycode == 23)
+	// 	COLOR = 65535;
 }
 
 static void	check_z(int keycode, t_coord *tmp, t_fdf *fdf)
