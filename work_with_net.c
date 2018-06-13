@@ -12,38 +12,33 @@
 
 #include "fdf.h"
 
-void		write_line(t_fdf *fdf, int x0, int y0, int x1, int y1)
+void		write_line(t_fdf *fdf, t_coord *xyz, int x1, int y1)
 {
- 	int 	dx; 
- 	int 	dy;
- 	int		sx;
- 	int		sy;
- 	int 	err;
- 	int		e2;
- 
- 	dx = abs(x1 - x0);
- 	dy = abs(y1 - y0);
- 	sx = (x0 < x1) ? 1 : -1;
- 	sy = (y0 < y1) ? 1 : -1;
- 	err = ((dx > dy) ? dx : -dy) / 2;
- 	while (1)
- 	{
-    	mlx_pixel_put(MLX, WIN, x0, y0, 0xFFFFFF);
-    	if (x0 == x1 && y0 == y1)
-    		break ;
-    	e2 = err;
-    	if (e2 > -dx)
-    	{
-    		err -= dy;
-    		x0 = x0 + sx;
-    	}
-    	if (e2 < dy)
-    	{
-    		err += dx;
-    		y0 = y0 + sy;
-    	}
-    }
-  }
+	X0 = (int)PX(xyz->x, SIZE);
+	Y0 = (int)PY(xyz->y, SIZE);
+	fdf->dx = abs(x1 - X0);
+	fdf->dy = abs(y1 - Y0);
+	fdf->sx = (X0 < x1) ? 1 : -1;
+	fdf->sy = (Y0 < y1) ? 1 : -1;
+	fdf->err = ((fdf->dx > fdf->dy) ? fdf->dx : -fdf->dy) / 2;
+	while (1)
+	{
+		mlx_pixel_put(MLX, WIN, X0, Y0, COLOR);
+		if (X0 == x1 && Y0 == y1)
+			break ;
+		fdf->e2 = fdf->err;
+		if (fdf->e2 > -fdf->dx)
+		{
+			fdf->err -= fdf->dy;
+			X0 = X0 + fdf->sx;
+		}
+		if (fdf->e2 < fdf->dy)
+		{
+			fdf->err += fdf->dx;
+			Y0 = Y0 + fdf->sy;
+		}
+	}
+}
 
 void		drawing_net(t_fdf *fdf, t_coord *xyz)
 {
@@ -56,22 +51,19 @@ void		drawing_net(t_fdf *fdf, t_coord *xyz)
 		SIZE = 0;
 	while (xyz)
 	{
-		i = NUM_X;
+		i = NUM_X + 1;
 		tmp = xyz->next;
 		if (xyz->next && n < NUM_X - 1)
-			write_line(fdf, (int)PX(xyz->x, SIZE), (int)PY(xyz->y, SIZE),
+			write_line(fdf, xyz,
 				(int)PX(xyz->next->x, SIZE), (int)PY(xyz->next->y, SIZE));
-		while (tmp && i > 1)
-		{
+		while (tmp && --i > 1)
 			tmp = tmp->next;
-			i--;
-		}
 		if (n == NUM_X - 1)
 			n = 0;
 		else
 			n++;
 		if (tmp && i == 1)
-			write_line(fdf, (int)PX(xyz->x, SIZE), (int)PY(xyz->y, SIZE),
+			write_line(fdf, xyz,
 				(int)PX(tmp->x, SIZE), (int)PY(tmp->y, SIZE));
 		xyz = xyz->next;
 	}

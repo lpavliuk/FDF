@@ -37,6 +37,9 @@
 # define RAD_Z fdf->rad_z
 # define XYZ fdf->xyz
 # define SIZE fdf->size
+# define COLOR fdf->color
+# define X0 fdf->x0
+# define Y0 fdf->y0
 
 # define PI 3.14159265359
 # define PX(a, b) (a * b/2/NUM_X + 750)
@@ -54,6 +57,7 @@ typedef struct	s_fdf
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
+	char	*line;
 	int		max_x;
 	int		max_y;
 	int		num_x;
@@ -66,9 +70,16 @@ typedef struct	s_fdf
 	float	prev_z;
 	int		k;
 	int		fd;
-	char	*line;
 	int		size;
-	// char	*color;
+	int		color;
+	int		dx;
+	int		dy;
+	int		sx;
+	int		sy;
+	int		err;
+	int		e2;
+	int		x0;
+	int		y0;
 	t_coord	*xyz;
 }				t_fdf;
 

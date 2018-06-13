@@ -90,15 +90,22 @@ int			main(int argc, char **argv)
 	fdf->prev_y = 0;
 	fdf->prev_z = 0;
 	fdf->k = 1;
+	fdf->dx = 0;
+	fdf->dy = 0;
+	fdf->sx = 0;
+	fdf->sy = 0;
+	fdf->err = 0;
+	fdf->e2 = 0;
+	fdf->x0 = 0;
+	fdf->y0 = 0;
 	SIZE = 1000;
 	XYZ = xyz;
+	COLOR = 16777215;
 	if (argc == 1 || argc > 2)
 		ft_error(ERR_1);
-	if ((FD = open(argv[1], O_RDONLY)) < 1)
+	if ((FD = open(argv[1], O_RDONLY)) < 1 || read(FD, &LINE, 0) < 0)
 		ft_error(ERR_0);
 	validation(fdf, xyz);
 	draw_net(fdf, xyz);
-	show_list(fdf, xyz);
-	// system("leaks fdf");
 	return (0);
 }
