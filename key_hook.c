@@ -35,26 +35,6 @@ static void	work_with_xy(int keycode, t_coord *xyz)
 	}
 }
 
-// static void	to_z(t_coord *xyz, char add)
-// {
-// 	if (add)
-// 	{
-// 		while (xyz)
-// 		{
-// 			xyz->z *= 1.1;
-// 			xyz = xyz->next;
-// 		}
-// 	}
-// 	else
-// 	{
-// 		while (xyz)
-// 		{
-// 			xyz->z *= 0.9;
-// 			xyz = xyz->next;
-// 		}
-// 	}
-// }
-
 static void	change_color(int keycode, t_fdf *fdf)
 {
 	if (keycode == 29)
@@ -71,10 +51,6 @@ static void	change_color(int keycode, t_fdf *fdf)
 		COLOR = 16711935;
 	else if (keycode == 23)
 		COLOR = 65535;
-	// else if (keycode == 27)
-	// 	to_z(XYZ, 1);
-	// else if (keycode == 24)
-	// 	to_z(XYZ, 0);
 }
 
 static void	check_z(int keycode, t_coord *tmp, t_fdf *fdf)

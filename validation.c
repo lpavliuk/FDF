@@ -24,6 +24,29 @@ static t_coord	*lstnew(t_coord *xyz)
 	return (xyz->next);
 }
 
+static void		check_str(char *str)
+{
+	int i;
+	int	minus;
+	int	plus;
+
+	i = 0;
+	minus = 0;
+	plus = 0;
+	while (str[i] != '\0')
+	{
+		if (!ft_isdigit(str[i]) && str[i] != '-' && str[i] != '+')
+			ft_error(ERR_3);
+		else if (str[i] == '-')
+			minus++;
+		else if (str[i] == '+')
+			plus++;
+		i++;
+		if (minus > 1 || plus > 1 || (minus && plus))
+			ft_error(ERR_3);
+	}
+}
+
 static int		write_coord(t_fdf *fdf, t_coord *xyz, int i)
 {
 	int		n;
@@ -36,6 +59,7 @@ static int		write_coord(t_fdf *fdf, t_coord *xyz, int i)
 		xyz = lstnew(xyz);
 	while (str[n] != 0)
 	{
+		check_str(str[n]);
 		xyz->x = (float)n;
 		xyz->y = (float)i;
 		xyz->z = (float)ft_atoi(str[n]);

@@ -23,6 +23,7 @@
 # define ERR_0 "{red}ERROR: {yellow}incorrect input file!\n"
 # define ERR_1 "{red}ERROR: {yellow}must be ONLY ONE argument!\n"
 # define ERR_2 "{red}ERROR: {yellow}incorrect data in file!\n"
+# define ERR_3 "{red}ERROR: {yellow}incorrect input 'z' coordinate!\n"
 
 # define MLX fdf->mlx_ptr
 # define WIN fdf->win_ptr
