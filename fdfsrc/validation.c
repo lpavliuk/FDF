@@ -78,7 +78,6 @@ static int		write_coord(t_fdf *fdf, t_coord *xyz, int i)
 {
 	int		n;
 	char	**str;
-	t_coord *tmp;
 
 	n = 0;
 	str = ft_strsplit(LINE, ' ');

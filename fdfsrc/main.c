@@ -20,6 +20,7 @@ void		ft_error(char *error)
 
 static int	exit_x(int keycode)
 {
+	keycode = 0;
 	exit(0);
 }
 
