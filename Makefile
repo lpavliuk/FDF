@@ -23,16 +23,16 @@ OBJ=$(SRC:.c=.o)
 LIB = libft/libft.a
 NAME=fdf
 
-all: $(NAME)
+all: lib $(NAME)
 
 %.o: %.c
 	@ $(CC) $(CFLAGS) -o $@ -c $< -I ./
 
-$(NAME): $(LIB) $(OBJ)
+$(NAME): $(OBJ) $(LIB)
 	@ $(CC) $(CFLAGS) $(OBJ) $(LIB) -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit -o $(NAME) -I /usr/local/include 
 	@ printf "\e[37;1m[Program \e[34;1mfdf \e[37;1mis \e[32;1mREADY TO SHOW!\e[37;1m]\e[0m🎅🏾🤙🏾🥃\n"
 
-$(LIB):
+lib:
 	@ printf "\e[32;1mCompiling libft.a ...\n"
 	@ make -C libft/
 	@ printf "\n\e[32;1mCompiling fdf ...\n"
