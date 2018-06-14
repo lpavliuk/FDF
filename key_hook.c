@@ -37,20 +37,29 @@ static void	work_with_xy(int keycode, t_coord *xyz)
 
 static void	change_color(int keycode, t_fdf *fdf)
 {
-	// if (keycode == 29)
-	// 	COLOR = 16777215;
-	// else if (keycode == 18)
-	// 	COLOR = 16776960;
-	// else if (keycode == 19)
-	// 	COLOR = 16711680;
-	// else if (keycode == 20)
-	// 	COLOR = 65280;
-	// else if (keycode == 21)
-	// 	COLOR = 255;
-	// else if (keycode == 22)
-	// 	COLOR = 16711935;
-	// else if (keycode == 23)
-	// 	COLOR = 65535;
+	int		x;
+	t_coord	*tmp;
+
+	tmp = XYZ;
+	if (keycode == 29)
+		x = 16777215;
+	else if (keycode == 18)
+		x = 16776960;
+	else if (keycode == 19)
+		x = 16711680;
+	else if (keycode == 20)
+		x = 65280;
+	else if (keycode == 21)
+		x = 255;
+	else if (keycode == 22)
+		x = 16711935;
+	else if (keycode == 23)
+		x = 65535;
+	while (tmp)
+	{
+		tmp->color = x;
+		tmp = tmp->next;
+	}
 }
 
 static void	check_z(int keycode, t_coord *tmp, t_fdf *fdf)
@@ -79,6 +88,14 @@ static void	check_z(int keycode, t_coord *tmp, t_fdf *fdf)
 	}
 }
 
+static void	instuctions(t_fdf *fdf)
+{
+	if (!fdf->k)
+		fdf->k = 1;
+	else
+		fdf->k = 0;
+}
+
 int			key_hook(int keycode, t_fdf *fdf)
 {
 	if (keycode == 53)
@@ -99,10 +116,10 @@ int			key_hook(int keycode, t_fdf *fdf)
 	else if ((keycode >= 18 && keycode <= 23) || keycode == 29
 		|| keycode == 27 || keycode == 24)
 		change_color(keycode, fdf);
+	else if (keycode == 49)
+		instuctions(fdf);
 	mlx_clear_window(MLX, WIN);
 	drawing_net(fdf, XYZ);
-	RAD_X = 0;
-	RAD_Y = 0;
-	RAD_Z = 0;
+	also(fdf);
 	return (0);
 }

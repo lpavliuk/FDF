@@ -1,1 +1,1 @@
-gcc main.c key_hook.c work_with_coord.c validation.c work_with_net.c libft/libft.a -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit -o fdf -I /usr/local/include
+gcc main.c atoi_base_16.c key_hook.c work_with_coord.c validation.c work_with_net.c libft/libft.a -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit -o fdf -I /usr/local/include

@@ -25,42 +25,6 @@ static t_coord	*lstnew(t_coord *xyz)
 	return (xyz->next);
 }
 
-static int		ft_atoi_base(const char *str)
-{
-	int			x;
-	int			n;
-	size_t		i;
-	long long	num;
-	char		*base = "0123456789ABCDEF";
-
-
-	x = 1;
-	i = 0;
-	num = 0;
-	while ((str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
-			&& str[i] != '\0')
-		i++;
-	(str[i] == '-') ? x = -1 : 0;
-	(str[i] == '+' || str[i] == '-') ? i++ : 0;
-	while (str[i] >= '0' && str[i] <= '9'
-		&& str[i] >= 'A' && str[i] <= 'F')
-	{
-		if (str[i] >= '0' && str[i] <= '9')
-			num = num * 10 + (str[i] - '0');
-		else
-		{
-			n = 0;
-			while (base[n] != str[i])
-				n++;
-			num = num * 100 + n;
-		}
-		i++;
-	}
-	(num < 0 && x == -1) ? num = 0 : 0;
-	(num < 0 && x == 1) ? num = -1 : 0;
-	return ((int)(num * x));
-}
-
 static void		check_color(t_coord *xyz, char *str)
 {
 	int i;
@@ -78,7 +42,7 @@ static void		check_color(t_coord *xyz, char *str)
 	}
 	if (i > 8)
 		ft_error(ERR_4);
-	xyz->color = ft_atoi_base(&str[2]);
+	COLOR = ft_atoi_base_16(&str[2]);
 }
 
 static void		check_str(t_coord *xyz, char *str)
@@ -102,7 +66,6 @@ static void		check_str(t_coord *xyz, char *str)
 		else if (str[i] == ',')
 		{
 			check_color(xyz, &str[i + 1]);
-			ft_printf("%d\n", COLOR);
 			return ;
 		}
 		i++;

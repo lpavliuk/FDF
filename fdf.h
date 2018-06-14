@@ -13,8 +13,6 @@
 #ifndef FDF_H
 # define FDF_H
 
-# include <stdio.h> /* DELETE IT! */
-
 # include "libft/libft.h"
 # include <mlx.h>
 # include <math.h>
@@ -43,7 +41,6 @@
 # define Y0 fdf->y0
 # define COLOR xyz->color
 
-# define PI 3.14159265359
 # define PX(a, b) (a * b/2/NUM_X + 750)
 # define PY(a, b) (a * b/2/NUM_Y + 200)
 
@@ -71,10 +68,9 @@ typedef struct	s_fdf
 	float	prev_x;
 	float	prev_y;
 	float	prev_z;
-	int		k;
+	char	k;
 	int		fd;
 	int		size;
-	// int		color;
 	int		dx;
 	int		dy;
 	int		sx;
@@ -93,5 +89,7 @@ void			for_x(t_coord *xyz, t_fdf *fdf);
 void			for_y(t_coord *xyz, t_fdf *fdf);
 void			for_z(t_coord *xyz, t_fdf *fdf);
 void			drawing_net(t_fdf *fdf, t_coord *xyz);
+int				ft_atoi_base_16(const char *str);
+void			also(t_fdf *fdf);
 
 #endif

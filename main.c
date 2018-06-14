@@ -12,19 +12,6 @@
 
 #include "fdf.h"
 
-/*****************SHOW LIST!*******************/
-
-void		show_list(t_fdf *fdf, t_coord *xyz)
-{
-	while (xyz)
-	{
-		printf("x: %f, y: %f, z: %f\n", xyz->x, xyz->y, xyz->z);
-		xyz = xyz->next;
-	}
-	ft_printf("Num x: %d\nNum y: %d\n", NUM_X, NUM_Y);
-}
-/**********************************************/
-
 void		ft_error(char *error)
 {
 	ft_printf(error);
@@ -54,12 +41,38 @@ static void	draw_net(t_fdf *fdf, t_coord *xyz)
 		tmp = tmp->next;
 	}
 	drawing_net(fdf, xyz);
-	RAD_X = 0;
-	RAD_Y = 0;
-	RAD_Z = 0;
+	also(fdf);
 	mlx_hook(WIN, 2, 0, key_hook, fdf);
 	mlx_hook(WIN, 17, 1L << 17, exit_x, 0);
 	mlx_loop(MLX);
+}
+
+static void	to_null(t_fdf *fdf)
+{
+	MLX = NULL;
+	WIN = NULL;
+	FD = 0;
+	LINE = NULL;
+	MAX_X = 0;
+	MAX_Y = 0;
+	NUM_X = 0;
+	NUM_Y = 0;
+	RAD_X = -0.01;
+	RAD_Y = -0.15;
+	RAD_Z = 0.5;
+	fdf->prev_x = 0;
+	fdf->prev_y = 0;
+	fdf->prev_z = 0;
+	fdf->k = 0;
+	fdf->dx = 0;
+	fdf->dy = 0;
+	fdf->sx = 0;
+	fdf->sy = 0;
+	fdf->err = 0;
+	fdf->e2 = 0;
+	fdf->x0 = 0;
+	fdf->y0 = 0;
+	SIZE = 1000;
 }
 
 int			main(int argc, char **argv)
@@ -76,30 +89,7 @@ int			main(int argc, char **argv)
 	COLOR = 16777215;
 	xyz->next = NULL;
 	fdf = malloc(sizeof(t_fdf));
-	MLX = NULL;
-	WIN = NULL;
-	FD = 0;
-	LINE = NULL;
-	MAX_X = 0;
-	MAX_Y = 0;
-	NUM_X = 0;
-	NUM_Y = 0;
-	RAD_X = -0.01;
-	RAD_Y = -0.15;
-	RAD_Z = 0.5;
-	fdf->prev_x = 0;
-	fdf->prev_y = 0;
-	fdf->prev_z = 0;
-	fdf->k = 1;
-	fdf->dx = 0;
-	fdf->dy = 0;
-	fdf->sx = 0;
-	fdf->sy = 0;
-	fdf->err = 0;
-	fdf->e2 = 0;
-	fdf->x0 = 0;
-	fdf->y0 = 0;
-	SIZE = 1000;
+	to_null(fdf);
 	XYZ = xyz;
 	if (argc == 1 || argc > 2)
 		ft_error(ERR_1);
