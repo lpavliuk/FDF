@@ -34,7 +34,7 @@ static void	write_instuction(t_fdf *fdf)
 	mlx_string_put(MLX, WIN, 0, 340, 0xFFFFFF, "|       pink -|   '6'  |\n");
 	mlx_string_put(MLX, WIN, 0, 360, 0xFFFFFF, "|      white -|   '0'  |\n");
 	mlx_string_put(MLX, WIN, 0, 380, 0xFFFFFF, "|----------------------|\n");
-	mlx_string_put(MLX, WIN, 0, 400, 0xFFFFFF, "|ESC          |  'F1'  |\n");
+	mlx_string_put(MLX, WIN, 0, 400, 0xFFFFFF, "|ESC          |  SPACE |\n");
 	mlx_string_put(MLX, WIN, 0, 420, 0xFFFFFF, "------------------------\n");
 }
 
