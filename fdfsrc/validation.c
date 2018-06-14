@@ -36,9 +36,13 @@ static void		check_color(t_coord *xyz, char *str)
 		ft_error(ERR_4);
 	while (str[i] != '\0')
 	{
-		if (!ft_isdigit(str[i]) && str[i] < 'A' && str[i] > 'F')
+		if (ft_isdigit(str[i]))
+			i++;
+		else if ((str[i] >= 'A' && str[i] <= 'F')
+			|| (str[i] >= 'a' && str[i] <= 'f'))
+			i++;
+		else
 			ft_error(ERR_4);
-		i++;
 	}
 	if (i > 8)
 		ft_error(ERR_4);
@@ -95,6 +99,8 @@ static int		write_coord(t_fdf *fdf, t_coord *xyz, int i)
 	}
 	ft_stralldel(str, n);
 	free(str);
+	if (n == 1)
+		xyz = lstnew(xyz);
 	return (n);
 }
 

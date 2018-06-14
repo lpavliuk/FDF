@@ -12,14 +12,11 @@
 
 #include "fdf.h"
 
-static int	ft_add_to_atoi(const char *str, int i, int num)
+static int	work_while(int i)
 {
-	int		c;
-	int		base_16;
-	int		n;
-	char	*base;
+	int	base_16;
+	int c;
 
-	base = "0123456789ABCDEF";
 	base_16 = 1;
 	c = 6 - i;
 	while (c > 0)
@@ -27,12 +24,32 @@ static int	ft_add_to_atoi(const char *str, int i, int num)
 		base_16 = base_16 * 16;
 		c--;
 	}
+	return (base_16);
+}
+
+static int	ft_add_to_atoi(const char *str, int i, int num)
+{
+	int		base_16;
+	int		n;
+	char	*base;
+	char	*base1;
+
+	base = "0123456789ABCDEF";
+	base1 = "0123456789abcdef";
+	base_16 = work_while(i);
 	if (str[i] >= '0' && str[i] <= '9')
 		num = num + ((str[i] - '0') * base_16);
-	else
+	else if (str[i] >= 'A' && str[i] <= 'F')
 	{
 		n = 0;
 		while (base[n] != str[i])
+			n++;
+		num = num + (n * base_16);
+	}
+	else
+	{
+		n = 0;
+		while (base1[n] != str[i])
 			n++;
 		num = num + (n * base_16);
 	}
@@ -54,7 +71,8 @@ int			ft_atoi_base_16(const char *str)
 	(str[i] == '-') ? x = -1 : 0;
 	(str[i] == '+' || str[i] == '-') ? i++ : 0;
 	while ((str[i] >= '0' && str[i] <= '9')
-		|| (str[i] >= 'A' && str[i] <= 'F'))
+		|| (str[i] >= 'A' && str[i] <= 'F')
+		|| (str[i] >= 'a' && str[i] <= 'f'))
 	{
 		num = ft_add_to_atoi(str, i, num);
 		i++;
