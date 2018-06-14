@@ -85,7 +85,7 @@ static int		write_coord(t_fdf *fdf, t_coord *xyz, int i)
 
 	n = 0;
 	str = ft_strsplit(LINE, ' ');
-	if (xyz->next)
+	if (xyz->next || i > 0)
 		xyz = lstnew(xyz);
 	while (str[n] != 0)
 	{
@@ -99,8 +99,6 @@ static int		write_coord(t_fdf *fdf, t_coord *xyz, int i)
 	}
 	ft_stralldel(str, n);
 	free(str);
-	if (n == 1)
-		xyz = lstnew(xyz);
 	return (n);
 }
 

@@ -84,8 +84,8 @@ void		drawing_net(t_fdf *fdf, t_coord *xyz)
 	t_coord *tmp;
 
 	n = 0;
-	if (SIZE < 0)
-		SIZE = 0;
+	if (!xyz->next)
+		mlx_pixel_put(MLX, WIN, PX(xyz->x, SIZE), PY(xyz->y, SIZE), COLOR);
 	while (xyz)
 	{
 		i = NUM_X + 1;

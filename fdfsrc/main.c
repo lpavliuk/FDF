@@ -31,15 +31,18 @@ static void	draw_net(t_fdf *fdf, t_coord *xyz)
 	MLX = mlx_init();
 	WIN = mlx_new_window(MLX, 1920, 1080, "FDF");
 	tmp = xyz;
-	while (tmp)
+	if (tmp->next)
 	{
-		fdf->prev_x = tmp->x;
-		fdf->prev_y = tmp->y;
-		fdf->prev_z = tmp->z * 0.5;
-		for_x(tmp, fdf);
-		for_y(tmp, fdf);
-		for_z(tmp, fdf);
-		tmp = tmp->next;
+		while (tmp)
+		{
+			fdf->prev_x = tmp->x;
+			fdf->prev_y = tmp->y;
+			fdf->prev_z = tmp->z * 0.5;
+			for_x(tmp, fdf);
+			for_y(tmp, fdf);
+			for_z(tmp, fdf);
+			tmp = tmp->next;
+		}
 	}
 	drawing_net(fdf, xyz);
 	also(fdf);

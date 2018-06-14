@@ -76,6 +76,8 @@ static void	check_z(int keycode, t_coord *tmp, t_fdf *fdf)
 		RAD_Y += 0.05;
 	else if (keycode == 88)
 		RAD_Z += 0.05;
+	if (!tmp->next)
+		return ;
 	while (tmp)
 	{
 		fdf->prev_x = tmp->x;
@@ -88,12 +90,18 @@ static void	check_z(int keycode, t_coord *tmp, t_fdf *fdf)
 	}
 }
 
-static void	instuctions(t_fdf *fdf)
+static void	instuctions(int keycode, t_fdf *fdf)
 {
-	if (!fdf->k)
+	if (keycode == 49 && !fdf->k)
 		fdf->k = 1;
-	else
+	else if (keycode == 49 && fdf->k)
 		fdf->k = 0;
+	else if (keycode == 69)
+		SIZE += 100;
+	else if (keycode == 78)
+		SIZE -= 100;
+	if (SIZE < 0)
+		SIZE = 0;
 }
 
 int			key_hook(int keycode, t_fdf *fdf)
@@ -109,15 +117,11 @@ int			key_hook(int keycode, t_fdf *fdf)
 	else if (keycode == 83 || keycode == 84 || keycode == 85
 		|| keycode == 86 || keycode == 87 || keycode == 88)
 		check_z(keycode, XYZ, fdf);
-	else if (keycode == 69)
-		SIZE += 100;
-	else if (keycode == 78)
-		SIZE -= 100;
 	else if ((keycode >= 18 && keycode <= 23) || keycode == 29
 		|| keycode == 27 || keycode == 24)
 		change_color(keycode, fdf);
-	else if (keycode == 49)
-		instuctions(fdf);
+	else if (keycode == 49 || keycode == 69 || keycode == 78)
+		instuctions(keycode, fdf);
 	mlx_clear_window(MLX, WIN);
 	drawing_net(fdf, XYZ);
 	also(fdf);
