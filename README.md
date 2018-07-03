@@ -1,7 +1,7 @@
 # FDF
 
 
-__FdF__ - the representation in 3D of a landscape.
+__FdF__ - the representation in 3D of a landscape by use the __miniLibX__.
 
 
 In this project you discover the basics of graphic programming, and in particular how
