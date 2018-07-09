@@ -1,6 +1,12 @@
 # FDF
 
 
+__Usage: ./fdf [file].fdf__
+
+
+__You can use some maps from directory "test_maps"!__
+
+
 __FdF__ - the representation in 3D of a landscape by use the __miniLibX__.
 
 
@@ -48,7 +54,3 @@ Each number corresponds to a point in space:
 
 • The value corresponds to its altitude.
 
-
-__You can use some maps from directory "test_maps"!__
-
-__Usage: ./fdf [file].fdf__
