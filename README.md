@@ -54,3 +54,8 @@ Each number corresponds to a point in space:
 
 • The value corresponds to its altitude.
 
+
+<br>
+<img height="600" width="1000" src="https://github.com/lpavliuk/FDF/blob/master/screenshots/Screen%20Shot%202018-08-13%20at%202.12.11%20PM.png" />
+<img height="600" width="1000" src="https://github.com/lpavliuk/FDF/blob/master/screenshots/Screen%20Shot%202018-08-13%20at%202.16.00%20PM.png" />
+<br>
